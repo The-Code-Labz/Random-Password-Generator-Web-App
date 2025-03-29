@@ -1,0 +1,17 @@
+{
+  "name": "vite-starter",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "netlify:dev": "netlify dev",
+    "netlify:deploy": "netlify deploy --prod"
+  },
+  "devDependencies": {
+    "vite": "^5.4.8",
+    "netlify-cli": "^17.0.0"
+  }
+}
