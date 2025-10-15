@@ -2,40 +2,61 @@ import './style.css'
 import { generatePassword } from './passwordGenerator.js'
 
 document.querySelector('#app').innerHTML = `
-  <div class="container">
-    <h1>Random Password Generator</h1>
-    <div class="password-display">
-      <input type="text" id="password-output" readonly>
-      <button id="copy-button">Copy</button>
-    </div>
+  <div>
+    <h1>Password Generator</h1>
+    <p class="subtitle">Create secure, random passwords instantly</p>
     
-    <div class="options">
-      <div class="length-option">
-        <label for="password-length">Password Length: <span id="length-value">12</span></label>
-        <input type="range" id="password-length" min="4" max="32" value="12">
+    <div class="container">
+      <div class="password-display">
+        <input type="text" id="password-output" readonly>
+        <button id="copy-button">Copy</button>
       </div>
       
-      <div class="character-options">
-        <div class="option">
-          <input type="checkbox" id="uppercase" checked>
-          <label for="uppercase">Include Uppercase Letters (A-Z)</label>
+      <div class="options">
+        <div class="length-option">
+          <label for="password-length">
+            <span>Password Length</span>
+            <span id="length-value">16</span>
+          </label>
+          <input type="range" id="password-length" min="4" max="60" value="16">
         </div>
-        <div class="option">
-          <input type="checkbox" id="lowercase" checked>
-          <label for="lowercase">Include Lowercase Letters (a-z)</label>
-        </div>
-        <div class="option">
-          <input type="checkbox" id="numbers" checked>
-          <label for="numbers">Include Numbers (0-9)</label>
-        </div>
-        <div class="option">
-          <input type="checkbox" id="symbols">
-          <label for="symbols">Include Symbols (!@#$%^&*)</label>
+        
+        <div class="character-options">
+          <div class="option">
+            <input type="checkbox" id="uppercase" checked>
+            <label for="uppercase">
+              <span class="option-icon">A</span>
+              <span>Uppercase Letters (A-Z)</span>
+            </label>
+          </div>
+          <div class="option">
+            <input type="checkbox" id="lowercase" checked>
+            <label for="lowercase">
+              <span class="option-icon">a</span>
+              <span>Lowercase Letters (a-z)</span>
+            </label>
+          </div>
+          <div class="option">
+            <input type="checkbox" id="numbers" checked>
+            <label for="numbers">
+              <span class="option-icon">0</span>
+              <span>Numbers (0-9)</span>
+            </label>
+          </div>
+          <div class="option">
+            <input type="checkbox" id="symbols">
+            <label for="symbols">
+              <span class="option-icon">@</span>
+              <span>Symbols (!@#$%^&*)</span>
+            </label>
+          </div>
         </div>
       </div>
+      
+      <button id="generate-button">
+        <span>Generate Password</span>
+      </button>
     </div>
-    
-    <button id="generate-button">Generate Password</button>
   </div>
 `
 
@@ -86,8 +107,12 @@ copyButton.addEventListener('click', () => {
   document.execCommand('copy');
   
   // Visual feedback
+  const originalText = copyButton.textContent;
   copyButton.textContent = 'Copied!';
+  copyButton.style.background = 'linear-gradient(135deg, var(--success) 0%, #059669 100%)';
+  
   setTimeout(() => {
-    copyButton.textContent = 'Copy';
+    copyButton.textContent = originalText;
+    copyButton.style.background = '';
   }, 2000);
 });
